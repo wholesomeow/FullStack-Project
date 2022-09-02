@@ -37,7 +37,6 @@ def findProperNoun(data):
 
 def trueValue(value):
     trueval = value.translate({ord(c): None for c in '",.()[]'})
-
     return trueval
 
 
@@ -57,9 +56,10 @@ def cleanNounList(data):
         for items in lists:
             flatlist.append(items)
 
-    cleanNouns = list(set(flatlist))
+    cleanNouns = [*set(flatlist)]   # Not sure how this works but okay
     for index, value in enumerate(cleanNouns):
         truval = trueValue(value)
+        # This could probably be made better
         if len(truval) < 0:
             cleanNouns.pop(index)
         if compareValues(truval, article):

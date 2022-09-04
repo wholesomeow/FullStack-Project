@@ -3,7 +3,7 @@ from math import prod
 from nltk.tag import pos_tag
 
 article = ['A', 'An', 'The', 'There']
-prepositions = ['At', 'As']
+prepositions = ['At', 'As', 'For', 'In', 'On']
 removal = ['Both', 'Article', 'Activist', 'Still', 'Medium', 'Department', 'Oval', 'Reduction', 'Office',
            'However', 'Spokesperson', 'Several', 'Opposition', 'Day', 'Sensitive', 'Through', 'DeirEzzor24', 'Deir', 'II', 'III', 'IV']
 days = ['Monday', 'Tuesday', 'Wednesday',
@@ -33,6 +33,8 @@ def findProperNoun(data):
                     'NNP' or pos == 'NNPS']
         fulllist.append(nounlist)
     return fulllist
+
+# Returns the "True" value of each element in the text list
 
 
 def trueValue(value):
@@ -80,16 +82,16 @@ def main():
     with open('cleandata_2022-08-24.json', 'r') as f:
         jsonfile = json.load(f)
 
+    # Collect Proper Nouns
     nouncollect = findProperNoun(jsonfile)
     product = cleanNounList(nouncollect)
     print(product)
 
-    concat = concatContent(jsonfile)
-    alltext = {
-        'All Text': concat
-    }
-    with open('concatdata.json', 'w') as t:
-        json.dump(alltext, t, indent=4)
+    # Output text into training data txt file
+    # concat = concatContent(jsonfile)
+
+    # with open('concatdata.txt', 'a') as t:
+    #     t.write(concat, t)
 
 
 if __name__ == '__main__':
